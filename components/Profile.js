@@ -8,27 +8,18 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 const Stack = createStackNavigator();
 
 
-
-const ChatItem = ({ image, name, lastMessage, timestamp, navigation }) => {
-  const openChatScreen = () => {
-    navigation.navigate('ChatScreen', { name});
-  };
-
-  return (
-    <TouchableOpacity style={styles.chatItemContainer} onPress={openChatScreen}>
-      <Image source={image} style={styles.chatItemImage} />
-      <View style={styles.chatItemContent}>
-        <Text style={styles.chatItemName}>{name}</Text>
-        <Text style={styles.chatItemLastMessage}>{lastMessage}</Text>
-      </View>
-      <Text style={styles.chatItemTimestamp}>{timestamp}</Text>
-    </TouchableOpacity>
-  );
-};
-
 const Profile = ({ navigation }) => {
-  return (
+const handleClose=()=>{
+  navigation.goBack();
+}  
+return (
+  <ScrollView>
     <View style={styles.container}>
+      <View style={{paddingHorizontal:10,paddingVertical:10,}}>
+        <TouchableOpacity>
+        <Ionicons onPress={handleClose} name='close' size={24}/>
+        </TouchableOpacity>
+      </View>
       {/* Header */}
       <View style={styles.headerTop}>     
       <View style={styles.header}>
@@ -38,7 +29,7 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
         <View  style={{flexDirection:'column',paddingLeft:10}}>
         <Text onPress={() => navigation.navigate('Profile')} style={styles.userName}>Peter Paul</Text>
-        <Text style={{fontWeight:300,fontSize:12, color:"#0078D1"}}>peterpaul@gmail.com</Text>
+        <Text style={{fontWeight:300,fontSize:12, color:"#0078D1",paddingBottom:12}}>peterpaul@gmail.com</Text>
       <Text style={{color:'blue'}}>My Microsoft Account</Text>
         </View></View>
         <TouchableOpacity style={styles.createIconContainer}>
@@ -96,14 +87,14 @@ const Profile = ({ navigation }) => {
 <Text style={{paddingLeft:30}}>What's New</Text>
 </View>
 <View style={styles.topsection}>
- <Ionicons name="exit-outline" size={14} color="green" />
-<Text style={{paddingLeft:30}}>Sign out</Text>
+ <Ionicons onPress={() => navigation.navigate('WelcomeScreen')} name="exit-outline" size={14} color="green" />
+<Text onPress={() => navigation.navigate('WelcomeScreen')} style={{paddingLeft:30}}>Sign out</Text>
 </View>
 </View>
 
 
     
-    </View>
+    </View></ScrollView>
   );
 };
 
@@ -117,11 +108,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:"space-between",
-    paddingTop:15
   },
   headerTop: {
 paddingBottom:"2%",
 paddingHorizontal:20,
+borderWidth:1,borderTopColor:'lightgray',borderBottomColor:'white'
 
 }
   ,
@@ -131,21 +122,24 @@ alignItems:'center',
 padding:20,
 borderBottomWidth: 1,
 borderBottomColor:'lightgray',
-    paddingHorizontal:20,
+ paddingHorizontal:20,
 
  }
  ,
   accountImage: {
-    width: 35,
-    height: 35,
+    width: 60,
+    height: 60,
     borderRadius: 25,
     alignItems:'center',
-    marginTop:0
+    marginTop:20,
+
+
   },
   userName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight:600,
     fontSize:18, 
+    paddingTop:20
 },
 
     createIconContainer:{

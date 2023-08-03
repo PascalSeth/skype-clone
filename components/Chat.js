@@ -25,8 +25,11 @@ const ChatItem = ({ image, name, lastMessage, timestamp, navigation }) => {
   );
 };
 
-const Home = ({ navigation }) => {
-  return (
+const Home = ({ route, navigation }) => {
+  // Get the username from the route params
+  
+  const username = route.params?.usernamegh || 'Default User';
+    return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.headerTop}>     
@@ -36,7 +39,7 @@ const Home = ({ navigation }) => {
           <Image  source={require('../assets/1.jpeg')} style={styles.accountImage} />
         </TouchableOpacity>
         <View  style={{flexDirection:'column',paddingLeft:10}}>
-        <Text onPress={() => navigation.navigate('Profile')} style={styles.userName}>Peter Paul</Text>
+        <Text onPress={() => navigation.navigate('Profile')} style={styles.userName}>{username}</Text>
         <Text style={{fontWeight:300,fontSize:12, color:"#0078D1"}}>Share what you are up to</Text></View>
         </View>
         <TouchableOpacity style={styles.createIconContainer}>
